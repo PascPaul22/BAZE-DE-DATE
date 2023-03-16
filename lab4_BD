@@ -1,0 +1,44 @@
+1
+SELECT p.nume, f.* FROM Profesor p, Facultate f
+    WHERE p.fid = f.fid;
+
+2 
+SELECT c.titlu, s.nr_locuri FROM curs c, sala s
+    WHERE c.sala = s.cods AND c.ora > 12;
+    
+3
+SELECT c.titlu FROM curs c, sala s
+    WHERE c.sala = s.cods AND s.etaj = 1;
+    
+4
+SELECT c.titlu, p.nume FROM curs c, profesor p
+    WHERE c.zi = TRIM(TO_CHAR(SYSDATE, 'Day', 'NLS_DATE_LANGUAGE = Romanian'));
+
+5
+SELECT s.nume, c.titlu, c.sala
+ FROM student s, curs c, contract ct
+    WHERE ct.cid = c.cid AND ct.nota <= 8;
+
+6
+SELECT s.nume 
+    FROM student s, contract ct
+    WHERE s.sid = ct.sid(+) AND ct.sid IS NULL
+    ORDER BY s.nume, s.an;
+
+7
+SELECT s.nume
+    FROM student s, contract ct
+    WHERE s.sid = ct.sid
+    ORDER BY substr(nume, instr(nume, ' '));
+    
+8
+SELECT s.nume
+    FROM student s, contract ct, curs c
+    WHERE s.sid = ct.sid(+) and ct.cid = c.cid AND c.zi = 'Luni';
+
+9
+SELECT s.nume
+    FROM student s, contract ct, curs c, sala sl
+    WHERE s.sid = ct.sid(+) AND ct.cid = c.cid AND c.sala = sl.cods AND sl.nr_locuri < 200
+    ORDER BY s.datan, s.nume;
+
